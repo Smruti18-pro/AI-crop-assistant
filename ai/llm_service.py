@@ -59,4 +59,4 @@ def chat_with_krishiai(message: str, language: str = "English") -> str:
         return response.text
     except Exception as e:
         print(f"LLM Error: {e}")
-        return "I am currently experiencing technical difficulties connecting to the AI service. Please try again later or check your API configuration."
+        return f"I am currently experiencing technical difficulties connecting to the AI service. Error Details: {str(e)}"
