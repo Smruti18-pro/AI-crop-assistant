@@ -8,12 +8,11 @@ def get_weather(lat: float, lon: float) -> dict:
     api_key = os.environ.get("OPENWEATHER_API_KEY")
     
     if not api_key:
-        # Return mock data for testing
         return {
-            "temperature": 28.5,
-            "humidity": 65,
-            "description": "Partly Cloudy",
-            "rain_chance": 20
+            "temperature": "--",
+            "humidity": "--",
+            "description": "API Key Required",
+            "rain_chance": "--"
         }
         
     try:
@@ -23,16 +22,16 @@ def get_weather(lat: float, lon: float) -> dict:
         data = response.json()
         
         return {
-            "temperature": data["main"]["temp"],
+            "temperature": round(data["main"]["temp"], 1),
             "humidity": data["main"]["humidity"],
-            "description": data["weather"][0]["main"],
-            "rain_chance": 0 # OpenWeatherMap free tier doesn't always have PoP in current weather
+            "description": data["weather"][0]["main"].title(),
+            "rain_chance": "--" # OpenWeatherMap free tier current weather doesn't typically provide rain chance
         }
     except Exception as e:
         print(f"Weather API Error: {e}")
         return {
-            "temperature": 0,
-            "humidity": 0,
-            "description": "Unknown",
-            "rain_chance": 0
+            "temperature": "--",
+            "humidity": "--",
+            "description": "Service Unavailable",
+            "rain_chance": "--"
         }

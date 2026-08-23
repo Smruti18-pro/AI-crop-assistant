@@ -38,19 +38,19 @@ def get_recommendation(disease: str, confidence: float, weather: dict, market: d
         return response.text
     except Exception as e:
         print(f"LLM Error: {e}")
-        return "Sorry, I am unable to generate a recommendation at this time."
+        return "I am currently unable to generate a recommendation. Please verify that the Gemini API key is correctly configured and the service is available."
 
 def chat_with_krishiai(message: str, language: str = "English") -> str:
     """
     General chat interface for the KRISHIAI chatbot.
     """
     if not GEMINI_API_KEY:
-        return f"[Simulated Response] You said: {message}. (Language: {language})"
+        return f"System Notice: Please configure the GEMINI_API_KEY in the server environment to enable AI responses. (Received: {message})"
         
     try:
         model = genai.GenerativeModel(MODEL_NAME)
         prompt = f"""
-        You are KRISHIAI, a helpful, expert agricultural assistant.
+        You are KRISHIAI, a professional, expert agricultural assistant.
         Respond to the following message entirely in {language}:
         
         Farmer: {message}
@@ -59,4 +59,4 @@ def chat_with_krishiai(message: str, language: str = "English") -> str:
         return response.text
     except Exception as e:
         print(f"LLM Error: {e}")
-        return "Sorry, I am having trouble connecting to my brain right now."
+        return "I am currently experiencing technical difficulties connecting to the AI service. Please try again later or check your API configuration."

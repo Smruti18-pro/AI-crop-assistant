@@ -118,9 +118,14 @@ const Dashboard = () => {
               <h3><Cloud size={20} /> Weather & Conditions</h3>
               {loadingDashboard ? <p>Loading...</p> : (
                 <div className="weather-info">
-                  <h2>{dashboardData.weather?.temperature}°C</h2>
-                  <p>{dashboardData.weather?.description}</p>
-                  <p>Rain Chance: {dashboardData.weather?.rain_chance}%</p>
+                  <h2>
+                    {dashboardData.weather?.temperature}
+                    {dashboardData.weather?.temperature !== "--" && "°C"}
+                  </h2>
+                  <p className="weather-desc">{dashboardData.weather?.description}</p>
+                  {dashboardData.weather?.rain_chance !== "--" && (
+                    <p>Rain Chance: {dashboardData.weather?.rain_chance}%</p>
+                  )}
                 </div>
               )}
             </section>
