@@ -47,10 +47,20 @@ classes = None
 class UserCreate(BaseModel):
     username: str
     password: str
+    security_question: str
+    security_answer: str
 
 class UserLogin(BaseModel):
     username: str
     password: str
+
+class PasswordResetRequest(BaseModel):
+    username: str
+
+class PasswordResetSubmit(BaseModel):
+    username: str
+    security_answer: str
+    new_password: str
 
 # ==========================================
 # 3. Auth Utilities
@@ -90,11 +100,19 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Username already registered")
         
     hashed_password = get_password_hash(user.password)
+    # Lowercase the answer so it's case-insensitive during reset
+    hashed_answer = get_password_hash(user.security_answer.lower().strip())
     
     # If this is the very first user, make them an admin automatically
     is_admin = db.query(User).count() == 0
     
-    new_user = User(username=user.username, password_hash=hashed_password, is_admin=is_admin)
+    new_user = User(
+        username=user.username, 
+        password_hash=hashed_password, 
+        is_admin=is_admin,
+        security_question=user.security_question,
+        security_answer_hash=hashed_answer
+    )
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
@@ -110,6 +128,31 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
         
     access_token = create_access_token(data={"sub": db_user.username})
     return {"access_token": access_token, "token_type": "bearer", "username": db_user.username, "is_admin": db_user.is_admin}
+
+@app.post("/auth/security-question")
+def get_security_question(req: PasswordResetRequest, db: Session = Depends(get_db)):
+    db_user = db.query(User).filter(User.username == req.username).first()
+    if not db_user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return {"security_question": db_user.security_question}
+
+@app.post("/auth/reset-password")
+def reset_password(req: PasswordResetSubmit, db: Session = Depends(get_db)):
+    db_user = db.query(User).filter(User.username == req.username).first()
+    if not db_user:
+        raise HTTPException(status_code=404, detail="User not found")
+        
+    if not db_user.security_answer_hash:
+        raise HTTPException(status_code=400, detail="This account does not have a security question set up.")
+        
+    # Verify the provided answer (case insensitive)
+    if not verify_password(req.security_answer.lower().strip(), db_user.security_answer_hash):
+        raise HTTPException(status_code=401, detail="Incorrect answer to security question")
+        
+    # Update password
+    db_user.password_hash = get_password_hash(req.new_password)
+    db.commit()
+    return {"message": "Password successfully reset. You can now log in."}
 
 # ==========================================
 # 5. Core ML Endpoints

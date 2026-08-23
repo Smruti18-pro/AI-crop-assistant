@@ -14,7 +14,6 @@ history_v2.db
 
 # Datasets and Large Models
 dataset/
-*.pth
 
 # OS Files
 .DS_Store

@@ -4,9 +4,9 @@ from datetime import datetime
 import os
 import bcrypt
 
-# We create a v2 database so it doesn't conflict with the old one
+# We create a v3 database so it doesn't conflict with the old one
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-SQLALCHEMY_DATABASE_URL = f"sqlite:///{os.path.join(SCRIPT_DIR, 'history_v2.db')}"
+SQLALCHEMY_DATABASE_URL = f"sqlite:///{os.path.join(SCRIPT_DIR, 'history_v3.db')}"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
@@ -22,6 +22,10 @@ class User(Base):
     username = Column(String, unique=True, index=True)
     password_hash = Column(String)
     is_admin = Column(Boolean, default=False)
+    
+    # Security question for password resets
+    security_question = Column(String, default="What is your favorite color?")
+    security_answer_hash = Column(String, nullable=True)
 
     scans = relationship("ScanRecord", back_populates="owner")
 
