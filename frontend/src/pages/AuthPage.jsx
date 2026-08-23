@@ -221,13 +221,13 @@ const AuthPage = () => {
           <>
             <div className="auth-tabs">
               <button 
-                className={`tab-btn ${isLogin ? 'active' : ''}`}
+                className={`auth-tab ${isLogin ? 'active' : ''}`}
                 onClick={() => { setIsLogin(true); setError(''); }}
               >
                 Login
               </button>
               <button 
-                className={`tab-btn ${!isLogin ? 'active' : ''}`}
+                className={`auth-tab ${!isLogin ? 'active' : ''}`}
                 onClick={() => { setIsLogin(false); setError(''); }}
               >
                 Register
