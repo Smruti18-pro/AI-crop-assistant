@@ -1,0 +1,260 @@
+.admin-container {
+  min-height: 100vh;
+  padding: 2rem;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.1), transparent 50%);
+}
+
+.admin-header {
+  margin-bottom: 2rem;
+  padding: 1.5rem 2rem;
+}
+
+.admin-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.admin-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-title h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.admin-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-card {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.stat-icon-wrapper {
+  padding: 1rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-icon-wrapper.blue {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+
+.stat-icon-wrapper.green {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+.stat-icon-wrapper.orange {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+/* Admin Tabs Control */
+.admin-tabs-control {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.admin-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-tab-btn:hover {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+.admin-tab-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+}
+
+/* Table Section */
+.table-section {
+  padding: 0;
+  overflow: hidden;
+}
+
+.table-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.table-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.table-container {
+  overflow-x: auto;
+  padding: 0 1rem 1rem;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.admin-table th, .admin-table td {
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-table th {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.col-id {
+  color: var(--text-secondary);
+  font-family: monospace;
+}
+
+.col-file {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-primary);
+}
+
+.col-pred {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.col-conf {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.col-conf span {
+  width: 50px;
+  font-size: 0.9rem;
+}
+
+.conf-bar-bg {
+  width: 80px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.conf-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 99px;
+}
+
+.col-date {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status-badge.healthy {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+.status-badge.disease {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.loading-state, .empty-state {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--text-secondary);
+}

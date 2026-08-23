@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+
+# Virtual Environments
+venv/
+env/
+.env
+
+# Database
+*.db
+history_v2.db
+
+# Datasets and Large Models
+dataset/
+*.pth
+
+# OS Files
+.DS_Store
+Thumbs.db

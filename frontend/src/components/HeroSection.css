@@ -1,0 +1,130 @@
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem 4rem;
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.glow-sphere {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.sphere-1 {
+  background: rgba(16, 185, 129, 0.3);
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  left: -200px;
+  animation: float 10s infinite ease-in-out alternate;
+}
+
+.sphere-2 {
+  background: rgba(59, 130, 246, 0.2);
+  width: 500px;
+  height: 500px;
+  bottom: -100px;
+  right: -100px;
+  animation: float 8s infinite ease-in-out alternate-reverse;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+.hero-content {
+  max-width: 800px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  backdrop-filter: blur(8px);
+}
+
+.badge-icon {
+  color: var(--accent);
+}
+
+.hero-title {
+  font-size: clamp(3rem, 5vw, 5rem);
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin-bottom: 3rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-btn {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
+
+.btn-secondary {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 640px) {
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .hero-btn, .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
