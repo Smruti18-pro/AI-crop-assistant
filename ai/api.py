@@ -245,6 +245,54 @@ def get_all_users(db: Session = Depends(get_db), current_user: User = Depends(ge
     # Don't return passwords
     return [{"id": u.id, "username": u.username, "is_admin": u.is_admin} for u in users]
 
+# ==========================================
+# 6. KRISHIAI Phase 2 Endpoints
+# ==========================================
+from llm_service import chat_with_krishiai, get_recommendation
+from weather_service import get_weather
+from market_service import get_market_prices
+
+class ChatRequest(BaseModel):
+    message: str
+    language: str = "English"
+
+@app.post("/api/chat")
+def chat_endpoint(req: ChatRequest, current_user: User = Depends(get_current_user)):
+    response = chat_with_krishiai(req.message, req.language)
+    return {"reply": response}
+
+@app.get("/api/dashboard")
+def get_dashboard_data(lat: float = 20.296, lon: float = 85.824, current_user: User = Depends(get_current_user)):
+    weather = get_weather(lat, lon)
+    market = get_market_prices("Tomato") # Defaulting to Tomato for demo
+    
+    return {
+        "weather": weather,
+        "market": market
+    }
+
+class RecommendationRequest(BaseModel):
+    disease: str
+    confidence: float
+    lat: float = 20.296
+    lon: float = 85.824
+    crop: str = "Tomato"
+    language: str = "English"
+
+@app.post("/api/recommendation")
+def recommendation_endpoint(req: RecommendationRequest, current_user: User = Depends(get_current_user)):
+    weather = get_weather(req.lat, req.lon)
+    market = get_market_prices(req.crop)
+    
+    recommendation = get_recommendation(req.disease, req.confidence, weather, market, req.language)
+    
+    return {
+        "recommendation": recommendation,
+        "weather": weather,
+        "market": market
+    }
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)

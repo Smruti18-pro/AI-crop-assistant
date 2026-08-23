@@ -1,0 +1,117 @@
+.chatbot-container {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+}
+
+.chatbot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1rem;
+}
+
+.language-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-primary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.language-selector select {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.chatbot-messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.chat-message {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  max-width: 85%;
+  word-wrap: break-word;
+  position: relative;
+}
+
+.chat-message.user {
+  background: var(--accent-primary);
+  color: white;
+  align-self: flex-end;
+}
+
+.chat-message.ai {
+  background: rgba(255, 255, 255, 0.05);
+  align-self: flex-start;
+  padding-right: 2rem;
+}
+
+.speak-btn {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.2rem;
+}
+
+.speak-btn:hover {
+  color: var(--accent-primary);
+}
+
+.chatbot-input {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chatbot-input input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.mic-btn, .send-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mic-btn.listening {
+  color: red;
+  animation: pulse 1.5s infinite;
+}
+
+.send-btn {
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
